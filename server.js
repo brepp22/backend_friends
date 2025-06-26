@@ -18,9 +18,10 @@ const knex = require('./data/db-config');
 knex.migrate.latest()
   .then(() => {
     console.log('✅ Migrations completed');
+    return knex.seed.run();
   })
   .catch((err) => {
-    console.error('❌ Migration error:', err);
+    console.error('❌ Migration or seed error:', err);
   });
 
 
