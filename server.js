@@ -13,6 +13,17 @@ app.use(cors());
 app.use('/api', userRouter);
 app.use('/api', petRouter);
 
+const knex = require('./data/db-config'); 
+
+knex.migrate.latest()
+  .then(() => {
+    console.log('✅ Migrations completed');
+  })
+  .catch((err) => {
+    console.error('❌ Migration error:', err);
+  });
+
+
 
 app.get('/api/test' , (req, res) => {
     res.status(200).send('Test route is working')
