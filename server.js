@@ -7,7 +7,15 @@ app.use(express.json());
 const userRouter = require('./api/users/user-router');
 const petRouter = require('./api/pets/pets-router');
 
-app.use(cors());
+
+const allowedOrigins = ['http://localhost:3000', 'https://petconnection.netlify.app'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  credentials: true,
+}));
+
 
 // Routes for users and pets
 app.use('/api', userRouter);
