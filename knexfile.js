@@ -1,7 +1,7 @@
 const path = require('path');
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config(); // Load env vars
 
-// Shared configuration for migrations and seeds
+// Shared config for migrations/seeds
 const sharedConfig = {
   migrations: {
     directory: path.join(__dirname, './data/migrations'),
@@ -12,28 +12,23 @@ const sharedConfig = {
 };
 
 module.exports = {
-  // Development configuration (SQLite3)
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './data/dev.sqlite3', // Path to SQLite3 database file
+      filename: path.resolve(__dirname, './data/dev.sqlite3'),
     },
     ...sharedConfig,
     useNullAsDefault: true,
   },
-  // Production configuration (PostgreSQL)
   production: {
-    client: 'pg', // PostgreSQL client
+    client: 'sqlite3',  // <-- changed from 'pg' to 'sqlite3'
     connection: {
-      connectionString: process.env.DATABASE_URL, // Use DATABASE_URL
-      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false, // Enable SSL for Heroku
+      filename: process.env.DB_FILEPATH || path.resolve(__dirname, './data/prod.sqlite3'), // Use env var or default path
     },
     ...sharedConfig,
+    useNullAsDefault: true,
   },
 };
-
-
-
 
 
 
