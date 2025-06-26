@@ -13,9 +13,6 @@ app.use(cors());
 app.use('/api', userRouter);
 app.use('/api', petRouter);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
 app.get('/api/test' , (req, res) => {
     res.status(200).send('Test route is working')
@@ -25,7 +22,8 @@ app.get('/', (req, res) => {
     res.send('Server is up and running');
   });  
 
+const PORT = process.env.PORT || 9000;
 
-app.listen(process.env.PORT || 9000, () => {
+app.listen(PORT, () => {
   console.log(`server started on port ${process.env.PORT || 9000}`);
 });
