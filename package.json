@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "migrate:latest": "knex migrate:latest --knexfile ./api/config/knexfile.js"
+    "migrate:latest": "knex migrate:latest --knexfile ./api/config/knexfile.js",
+    "postinstall": "npm rebuild sqlite3"
   },
   "keywords": [],
   "author": "",
